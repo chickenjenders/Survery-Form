@@ -1,73 +1,226 @@
-body {
-  width: 100%;
-  height: 100vh;
+/* style.css */
+
+/* =============== Base Reset =============== */
+* {
   margin: 0;
-  color: #f5f6f7;
-  font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  font-size: 16px;
-  background-image: linear-gradient(
-    115deg,
-    rgba(58, 58, 158, 0.8),
-    rgba(136, 136, 206, 0.7)
-  ),
-  url(https://cdn.freecodecamp.org/testable-projects-fcc/images/survey-form-background.jpeg);
-
+  padding: 0;
+  box-sizing: border-box;
 }
 
-h1, p {
-  text-align: center;
+body {
+  font-family: "Press Start 2P", monospace;
+  background: black;
+  color: #00ffcc;
+  overflow: hidden;
 }
 
-form {
-  width: 60vw;
-  max-width: 500px;
-  min-width: 300px;
-  margin: 0 auto;
-  padding-bottom: 5em;
+button {
+  font-family: inherit;
+  font-size: 0.75rem;
+  background: black;
+  border: 2px solid #00ffcc;
+  color: #00ffcc;
+  padding: 0.5rem 1rem;
+  cursor: pointer;
+  margin: 0.5rem;
+  text-transform: uppercase;
 }
 
-fieldset {
-  border: none;
-  padding: 3rem 0;
-  border-bottom: 4px solid #E6E6FA;
+button:hover {
+  background: #00ffcc;
+  color: black;
 }
 
-fieldset:last-of-type {
-  border-bottom: none;
+/* =============== TV Container =============== */
+#tv-container {
+  width: 90vw;
+  height: 90vh;
+  margin: auto;
+  margin-top: 5vh;
+  background: #111;
+  border: 10px solid #555;
+  border-radius: 2rem;
+  position: relative;
+  box-shadow: 0 0 30px red, 0 0 10px #000 inset;
+  overflow: hidden;
+  display: flex;
+  flex-direction: row;
 }
 
-.questions {
-  background-color: #32174d;
-  width: 75%;
-  margin-left: auto;
-  margin-right: auto;
-  padding: 20px;
-  max-width: 500px;
+/* =============== TV Dials & Buttons =============== */
+.channel-menu {
+  width: 12%;
+  background: radial-gradient(#222, #000);
+  border-right: 3px solid #333;
+  padding: 1rem 0.5rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+  justify-content: center;
+  z-index: 10;
 }
 
-.inline {
-  width: unset;
-  margin: 0 0.5em 0 0;
-  vertical-align: middle;
-}
-
-input, textarea, select {
-  margin: 10px 0 0 0;
+.channel-btn {
+  background: #111;
+  border: 2px solid #f00;
+  color: #f00;
+  font-size: 0.6rem;
+  padding: 0.25rem 0.5rem;
   width: 100%;
-  min-height: 2em;
+  text-align: center;
+  transition: background 0.2s ease;
 }
 
-input{
-  margin-bottom: 2rem;
+.channel-btn:hover {
+  background: #f00;
+  color: black;
 }
 
-select {
-  margin-bottom: 30px;
+/* =============== VHS Overlay =============== */
+#overlay-vhs {
+  pointer-events: none;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: repeating-linear-gradient(
+    to bottom,
+    rgba(255, 255, 255, 0.02),
+    rgba(255, 255, 255, 0.02) 2px,
+    transparent 2px,
+    transparent 4px
+  );
+  mix-blend-mode: screen;
+  animation: vhsNoise 0.3s infinite;
+  z-index: 5;
+  opacity: 0.2;
 }
 
-form input[type="radio"] { 
-  float: left; 
-  width: 20px;
-  margin-right: 10px;
+@keyframes vhsNoise {
+  0% {
+    transform: translateY(0);
+  }
+  100% {
+    transform: translateY(-2px);
+  }
 }
 
+body.vhs-off #overlay-vhs {
+  display: none;
+}
+
+/* =============== Controls =============== */
+#controls {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  z-index: 10;
+  display: flex;
+  flex-direction: column;
+}
+
+/* =============== Screen =============== */
+.screen {
+  flex-grow: 1;
+  height: 100%;
+  padding: 2rem;
+  overflow-y: auto;
+  position: relative;
+  z-index: 2;
+  background: radial-gradient(ellipse at center, #111 0%, #000 100%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+}
+
+.channel-content {
+  display: none;
+  animation: fadeIn 0.5s ease forwards;
+  width: 100%;
+  max-width: 700px;
+  text-align: left;
+  background: #000e20;
+  border: 2px solid #00ffcc;
+  border-radius: 12px;
+  padding: 1.5rem;
+  box-shadow: 0 0 12px rgba(0, 255, 204, 0.4);
+}
+
+.channel-content.active {
+  display: block;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: scale(0.98);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.channel-content h1 {
+  font-size: 1.25rem;
+  color: #ff003c;
+  margin-bottom: 1rem;
+  text-shadow: 1px 1px black;
+}
+
+.channel-content p {
+  font-size: 0.7rem;
+  line-height: 1.6;
+  margin-bottom: 1rem;
+  color: #d3fefc;
+}
+
+.play-btn {
+  background: #ff003c;
+  color: white;
+  border: none;
+  font-size: 0.75rem;
+  padding: 0.5rem 1rem;
+  text-transform: uppercase;
+  border-radius: 4px;
+  box-shadow: 0 0 5px red;
+  cursor: pointer;
+}
+
+.play-btn:hover {
+  background: white;
+  color: #ff003c;
+}
+
+.bio-content {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  gap: 1.5rem;
+  flex-wrap: wrap;
+}
+
+.bio-image {
+  max-width: 75%;
+}
+
+.bio-text {
+  flex: 1;
+  font-size: 0.7rem;
+  color: #d3fefc;
+}
+
+.social-icons {
+  margin-top: 1rem;
+  display: flex;
+  gap: 1rem;
+  font-size: 1.5rem;
+}
+
+.screen-content {
+  display: flex;
+  flex-direction: row;
+}
