@@ -17,12 +17,12 @@ body {
 .tv-container {
   width: 1500px;
   height: 900px;
-  background: linear-gradient(145deg, #d2b48c, #a0522d);
+  background: url("tvscreen.png") no-repeat center center;
+  background-size: cover;
   border-radius: 15px;
-  padding: 30px;
-  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3),
-    inset 0 2px 10px rgba(255, 255, 255, 0.2);
   position: relative;
+  display: flex;
+  flex-direction: column;
 }
 
 .tv-inner {
@@ -33,7 +33,7 @@ body {
 
 .screen-container {
   flex: 1;
-  background: #000;
+
   border-radius: 10px;
   padding: 15px;
   position: relative;
@@ -43,26 +43,11 @@ body {
 .screen {
   width: 100%;
   height: 100%;
-  background: #000;
+
   border-radius: 8px;
   position: relative;
   overflow: hidden;
   transition: all 0.3s ease;
-}
-
-.screen.off {
-  background: #111;
-}
-
-.screen.off::after {
-  content: "";
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  width: 2px;
-  height: 100%;
-  background: rgba(255, 255, 255, 0.1);
-  transform: translate(-50%, -50%);
 }
 
 .content {
@@ -83,70 +68,8 @@ body {
   opacity: 0;
 }
 
-.vhs-filter {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  pointer-events: none;
-  opacity: 0;
-  transition: opacity 0.3s ease;
-}
-
-.vhs-filter.active {
-  opacity: 1;
-}
-
-.vhs-filter::before {
-  content: "";
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: repeating-linear-gradient(
-    0deg,
-    transparent,
-    transparent 2px,
-    rgba(0, 255, 0, 0.03) 2px,
-    rgba(0, 255, 0, 0.03) 4px
-  );
-  animation: scanlines 0.1s linear infinite;
-}
-
-.vhs-filter::after {
-  content: "";
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: rgba(255, 255, 255, 0.02);
-  animation: flicker 0.15s ease-in-out infinite alternate;
-}
-
-@keyframes scanlines {
-  0% {
-    transform: translateY(0);
-  }
-  100% {
-    transform: translateY(4px);
-  }
-}
-
-@keyframes flicker {
-  0% {
-    opacity: 0.02;
-  }
-  100% {
-    opacity: 0.05;
-  }
-}
-
 .controls {
   width: 350px;
-  background: linear-gradient(145deg, #8fbc8f, #556b2f);
   border-radius: 10px;
   padding: 20px;
   display: flex;
@@ -215,17 +138,17 @@ body {
 
 .on-btn {
   background: radial-gradient(circle, #90ee90, #32cd32);
-  color: #2f4f2f;
+  color: #000000;
 }
 
 .off-btn {
   background: radial-gradient(circle, #ffb6c1, #ff1493);
-  color: #8b0000;
+  color: #000000;
 }
 
 .vhs-btn {
   background: radial-gradient(circle, #dda0dd, #9370db);
-  color: #4b0082;
+  color: #000000;
 }
 
 .power-btn:hover {
@@ -234,23 +157,6 @@ body {
 
 .power-btn:active {
   transform: translateY(0);
-}
-
-.speaker-grille {
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  width: 100%;
-  height: 100px;
-  background: repeating-linear-gradient(
-    45deg,
-    #8b4513,
-    #8b4513 2px,
-    #a0522d 2px,
-    #a0522d 4px
-  );
-  border-radius: 5px;
-  margin-top: 10px;
 }
 
 .project-title {
@@ -301,41 +207,6 @@ body {
   display: flex;
   align-items: center;
   gap: 20px;
-}
-
-.vhs-tape {
-  width: 80px;
-  height: 60px;
-  background: linear-gradient(145deg, #333, #555);
-  border-radius: 3px;
-  position: relative;
-  flex-shrink: 0;
-}
-
-.vhs-tape::before {
-  content: "";
-  position: absolute;
-  top: 15px;
-  left: 15px;
-  width: 50px;
-  height: 30px;
-  background: #000;
-  border-radius: 2px;
-}
-
-.vhs-label {
-  position: absolute;
-  top: 5px;
-  left: 5px;
-  right: 5px;
-  height: 8px;
-  background: #ff6b6b;
-  border-radius: 1px;
-  font-size: 6px;
-  color: white;
-  display: flex;
-  align-items: center;
-  justify-content: center;
 }
 
 .about-text {
