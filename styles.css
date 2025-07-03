@@ -247,3 +247,41 @@ body {
   color: #2f4f2f;
   font-weight: bold;
 }
+.about-layout {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 40px;
+  padding: 20px;
+}
+
+.vhs-image img {
+  width: 250px;
+  transform: rotate(-10deg);
+  box-shadow: 5px 5px 20px rgba(0, 0, 0, 0.6);
+}
+
+.info-box {
+  background-color: #001f4d;
+  color: white;
+  border-radius: 12px;
+  padding: 25px;
+  max-width: 400px;
+  font-size: 16px;
+  border: 3px solid #ff0040;
+  box-shadow: 0 0 15px rgba(255, 0, 64, 0.5);
+}
+
+.info-title {
+  font-family: "Courier New", monospace;
+  font-weight: bold;
+  font-size: 20px;
+  margin-bottom: 15px;
+}
+
+.info-box p {
+  font-family: "Courier New", monospace;
+  font-size: 14px;
+  line-height: 1.5;
+  margin-bottom: 20px;
+}
