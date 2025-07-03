@@ -2,64 +2,44 @@
 <html lang="en">
 
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Made by Jen</title>
-  <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="styles.css">
+  <title>Jen Tyler</title>
 </head>
 
-<body class="vhs-on">
-  <!-- TV Frame (can be styled with background-image or divs) -->
-  <div id="tv-container">
-
-    <!-- VHS Overlay (can be SVG filter or video) -->
-    <div id="overlay-vhs"></div>
-
-    <!-- Power and VHS Filter Buttons -->
-    <div id="controls">
-      <button id="power-btn">Power On/Off</button>
-      <button id="filter-toggle">VHS Filter On/Off</button>
-    </div>
-
-    <!-- Channel Menu (fake remote / UI nav) -->
-    <div class="channel-menu">
-      <button class="channel-btn" data-channel="1">Channel 1</button>
-      <button class="channel-btn" data-channel="2">Channel 2</button>
-      <button class="channel-btn" data-channel="3">Channel 3</button>
-      <!-- ... add up to Channel 10 -->
-    </div>
-
-    <!-- Screen Content -->
-    <div class="screen">
-      <div class="screen-content">
-        <img src="jenpic.png" alt="Portrait on VHS Tape" class="bio-image">
-        <div id="channel-1" class="channel-content active">
-
-          <h1>About Me</h1>
-          <div class="bio-content">
-            <div class="bio-text">
-              <p><strong>Hi, my name is Jen!</strong></p>
-              <p>I am a game and web developer currently studying Digital Media at UCF. I specialize in spooky projects
-                and unique web experiences! Click the icons below to connect with me and explore the channels for
-                details
-                about my projects.</p>
-              <div class="social-icons">
-                <a href="#" aria-label="LinkedIn">🔗</a>
-                <a href="#" aria-label="GitHub">💻</a>
-                <a href="#" aria-label="Email">✉️</a>
-                <a href="#" aria-label="Portfolio">📁</a>
-              </div>
-            </div>
+<body>
+  <div class="tv-container">
+    <div class="tv-inner">
+      <div class="screen-container">
+        <div class="screen" id="screen">
+          <div class="content" id="content">
+            <!-- Content will be injected here -->
           </div>
+          <div class="vhs-filter" id="vhsFilter"></div>
         </div>
       </div>
-      <!-- Add more channel sections as needed -->
+
+      <div class="controls">
+        <div class="vhf-label">VHF</div>
+
+        <div class="channel-dial" id="channelDial">
+          <div class="dial-pointer" id="dialPointer"></div>
+        </div>
+
+        <div class="channel-display" id="channelDisplay">CH: 1</div>
+
+        <div class="power-buttons">
+          <button class="power-btn on-btn" id="onBtn">ON</button>
+          <button class="power-btn off-btn" id="offBtn">OFF</button>
+          <button class="power-btn vhs-btn" id="vhsBtn">VHS</button>
+        </div>
+
+        <div class="speaker-grille"></div>
+      </div>
     </div>
   </div>
-
-  <script src="main.js"></script>
-  <script src="vhs-toggle.js"></script>
+  <script src="script.js"></script>
 </body>
 
 </html>

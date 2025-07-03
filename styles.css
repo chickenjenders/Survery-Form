@@ -1,6 +1,3 @@
-/* style.css */
-
-/* =============== Base Reset =============== */
 * {
   margin: 0;
   padding: 0;
@@ -8,219 +5,371 @@
 }
 
 body {
-  font-family: "Press Start 2P", monospace;
-  background: black;
-  color: #00ffcc;
-  overflow: hidden;
-}
-
-button {
-  font-family: inherit;
-  font-size: 0.75rem;
-  background: black;
-  border: 2px solid #00ffcc;
-  color: #00ffcc;
-  padding: 0.5rem 1rem;
-  cursor: pointer;
-  margin: 0.5rem;
-  text-transform: uppercase;
-}
-
-button:hover {
-  background: #00ffcc;
-  color: black;
-}
-
-/* =============== TV Container =============== */
-#tv-container {
-  width: 90vw;
-  height: 90vh;
-  margin: auto;
-  margin-top: 5vh;
-  background: #111;
-  border: 10px solid #555;
-  border-radius: 2rem;
-  position: relative;
-  box-shadow: 0 0 30px red, 0 0 10px #000 inset;
-  overflow: hidden;
+  background: linear-gradient(135deg, #000000, #3d3d3c);
+  min-height: 100vh;
   display: flex;
-  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  font-family: "Courier New", monospace;
+  padding: 20px;
 }
 
-/* =============== TV Dials & Buttons =============== */
-.channel-menu {
-  width: 12%;
-  background: radial-gradient(#222, #000);
-  border-right: 3px solid #333;
-  padding: 1rem 0.5rem;
+.tv-container {
+  width: 1500px;
+  height: 900px;
+  background: linear-gradient(145deg, #d2b48c, #a0522d);
+  border-radius: 15px;
+  padding: 30px;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3),
+    inset 0 2px 10px rgba(255, 255, 255, 0.2);
+  position: relative;
+}
+
+.tv-inner {
+  display: flex;
+  height: 100%;
+  gap: 20px;
+}
+
+.screen-container {
+  flex: 1;
+  background: #000;
+  border-radius: 10px;
+  padding: 15px;
+  position: relative;
+  overflow: hidden;
+}
+
+.screen {
+  width: 100%;
+  height: 100%;
+  background: #000;
+  border-radius: 8px;
+  position: relative;
+  overflow: hidden;
+  transition: all 0.3s ease;
+}
+
+.screen.off {
+  background: #111;
+}
+
+.screen.off::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 2px;
+  height: 100%;
+  background: rgba(255, 255, 255, 0.1);
+  transform: translate(-50%, -50%);
+}
+
+.content {
+  width: 100%;
+  height: 100%;
   display: flex;
   flex-direction: column;
-  align-items: center;
-  gap: 0.5rem;
   justify-content: center;
-  z-index: 10;
-}
-
-.channel-btn {
-  background: #111;
-  border: 2px solid #f00;
-  color: #f00;
-  font-size: 0.6rem;
-  padding: 0.25rem 0.5rem;
-  width: 100%;
+  align-items: center;
+  color: white;
   text-align: center;
-  transition: background 0.2s ease;
+  padding: 20px;
+  opacity: 1;
+  transition: opacity 0.3s ease;
 }
 
-.channel-btn:hover {
-  background: #f00;
-  color: black;
+.content.hidden {
+  opacity: 0;
 }
 
-/* =============== VHS Overlay =============== */
-#overlay-vhs {
+.vhs-filter {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
   pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.vhs-filter.active {
+  opacity: 1;
+}
+
+.vhs-filter::before {
+  content: "";
   position: absolute;
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
   background: repeating-linear-gradient(
-    to bottom,
-    rgba(255, 255, 255, 0.02),
-    rgba(255, 255, 255, 0.02) 2px,
+    0deg,
+    transparent,
     transparent 2px,
-    transparent 4px
+    rgba(0, 255, 0, 0.03) 2px,
+    rgba(0, 255, 0, 0.03) 4px
   );
-  mix-blend-mode: screen;
-  animation: vhsNoise 0.3s infinite;
-  z-index: 5;
-  opacity: 0.2;
+  animation: scanlines 0.1s linear infinite;
 }
 
-@keyframes vhsNoise {
+.vhs-filter::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(255, 255, 255, 0.02);
+  animation: flicker 0.15s ease-in-out infinite alternate;
+}
+
+@keyframes scanlines {
   0% {
     transform: translateY(0);
   }
   100% {
-    transform: translateY(-2px);
+    transform: translateY(4px);
   }
 }
 
-body.vhs-off #overlay-vhs {
-  display: none;
+@keyframes flicker {
+  0% {
+    opacity: 0.02;
+  }
+  100% {
+    opacity: 0.05;
+  }
 }
 
-/* =============== Controls =============== */
-#controls {
-  position: absolute;
-  top: 1rem;
-  right: 1rem;
-  z-index: 10;
+.controls {
+  width: 350px;
+  background: linear-gradient(145deg, #8fbc8f, #556b2f);
+  border-radius: 10px;
+  padding: 20px;
   display: flex;
   flex-direction: column;
-}
-
-/* =============== Screen =============== */
-.screen {
-  flex-grow: 1;
-  height: 100%;
-  padding: 2rem;
-  overflow-y: auto;
+  gap: 15px;
+  box-shadow: inset 0 2px 5px rgba(0, 0, 0, 0.2);
   position: relative;
-  z-index: 2;
-  background: radial-gradient(ellipse at center, #111 0%, #000 100%);
+}
+
+.vhf-label {
+  color: #2f4f2f;
+  font-size: 12px;
+  text-align: center;
+  font-weight: bold;
+}
+.channel-dial {
+  width: 200px;
+  height: 155px;
+  background: radial-gradient(circle, #8f918f, #535353);
+  border-radius: 50%;
+  position: relative;
+  cursor: pointer;
+  margin: 0 auto;
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.3),
+    inset 0 2px 5px rgba(255, 255, 255, 0.2);
+  transition: all 0.1s ease;
+}
+
+.channel-dial:hover {
+  transform: scale(1.05);
+}
+
+.channel-dial:active {
+  transform: scale(0.95);
+}
+
+.dial-pointer {
+  position: relative;
+  top: 35%;
+  left: 50%;
+  width: 4px;
+  height: 25px;
+  background: #333333;
+  transform: translate(-50%, -50%);
+  border-radius: 2px;
+  transition: transform 0.3s ease;
+  transform-origin: 50% 100%;
+}
+.power-buttons {
   display: flex;
   flex-direction: column;
-  align-items: center;
-  justify-content: flex-start;
+  gap: 10px;
 }
 
-.channel-content {
-  display: none;
-  animation: fadeIn 0.5s ease forwards;
+.power-btn {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  border: none;
+  cursor: pointer;
+  font-size: 12px;
+  font-weight: bold;
+  transition: all 0.2s ease;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+}
+
+.on-btn {
+  background: radial-gradient(circle, #90ee90, #32cd32);
+  color: #2f4f2f;
+}
+
+.off-btn {
+  background: radial-gradient(circle, #ffb6c1, #ff1493);
+  color: #8b0000;
+}
+
+.vhs-btn {
+  background: radial-gradient(circle, #dda0dd, #9370db);
+  color: #4b0082;
+}
+
+.power-btn:hover {
+  transform: translateY(-2px);
+}
+
+.power-btn:active {
+  transform: translateY(0);
+}
+
+.speaker-grille {
+  position: absolute;
+  bottom: 0;
+  left: 0;
   width: 100%;
-  max-width: 700px;
-  text-align: left;
-  background: #000e20;
-  border: 2px solid #00ffcc;
-  border-radius: 12px;
-  padding: 1.5rem;
-  box-shadow: 0 0 12px rgba(0, 255, 204, 0.4);
+  height: 100px;
+  background: repeating-linear-gradient(
+    45deg,
+    #8b4513,
+    #8b4513 2px,
+    #a0522d 2px,
+    #a0522d 4px
+  );
+  border-radius: 5px;
+  margin-top: 10px;
 }
 
-.channel-content.active {
-  display: block;
+.project-title {
+  font-size: 24px;
+  color: #ff6b6b;
+  margin-bottom: 15px;
+  text-shadow: 0 0 10px rgba(255, 107, 107, 0.5);
 }
 
-@keyframes fadeIn {
-  from {
-    opacity: 0;
-    transform: scale(0.98);
-  }
-  to {
-    opacity: 1;
-    transform: scale(1);
-  }
+.project-description {
+  font-size: 14px;
+  line-height: 1.4;
+  margin-bottom: 20px;
+  color: #ffffff;
 }
 
-.channel-content h1 {
-  font-size: 1.25rem;
-  color: #ff003c;
-  margin-bottom: 1rem;
-  text-shadow: 1px 1px black;
-}
-
-.channel-content p {
-  font-size: 0.7rem;
-  line-height: 1.6;
-  margin-bottom: 1rem;
-  color: #d3fefc;
+.project-image {
+  width: 120px;
+  height: 80px;
+  background: #333;
+  border-radius: 5px;
+  margin-bottom: 15px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #666;
+  font-size: 12px;
 }
 
 .play-btn {
-  background: #ff003c;
+  background: linear-gradient(45deg, #ff6b6b, #ff4757);
   color: white;
   border: none;
-  font-size: 0.75rem;
-  padding: 0.5rem 1rem;
-  text-transform: uppercase;
-  border-radius: 4px;
-  box-shadow: 0 0 5px red;
+  padding: 8px 16px;
+  border-radius: 15px;
   cursor: pointer;
+  font-size: 12px;
+  font-weight: bold;
+  transition: all 0.2s ease;
 }
 
 .play-btn:hover {
-  background: white;
-  color: #ff003c;
+  background: linear-gradient(45deg, #ff4757, #ff3838);
+  transform: translateY(-2px);
 }
 
-.bio-content {
+.about-content {
   display: flex;
-  flex-direction: row;
-  align-items: flex-start;
-  gap: 1.5rem;
-  flex-wrap: wrap;
+  align-items: center;
+  gap: 20px;
 }
 
-.bio-image {
-  max-width: 75%;
+.vhs-tape {
+  width: 80px;
+  height: 60px;
+  background: linear-gradient(145deg, #333, #555);
+  border-radius: 3px;
+  position: relative;
+  flex-shrink: 0;
 }
 
-.bio-text {
+.vhs-tape::before {
+  content: "";
+  position: absolute;
+  top: 15px;
+  left: 15px;
+  width: 50px;
+  height: 30px;
+  background: #000;
+  border-radius: 2px;
+}
+
+.vhs-label {
+  position: absolute;
+  top: 5px;
+  left: 5px;
+  right: 5px;
+  height: 8px;
+  background: #ff6b6b;
+  border-radius: 1px;
+  font-size: 6px;
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.about-text {
   flex: 1;
-  font-size: 0.7rem;
-  color: #d3fefc;
 }
 
 .social-icons {
-  margin-top: 1rem;
   display: flex;
-  gap: 1rem;
-  font-size: 1.5rem;
+  gap: 10px;
+  margin-top: 15px;
 }
 
-.screen-content {
+.social-icon {
+  width: 30px;
+  height: 30px;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 5px;
   display: flex;
-  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  color: #ffffff;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.social-icon:hover {
+  background: rgba(255, 255, 255, 0.2);
+  transform: translateY(-2px);
+}
+
+.channel-display {
+  text-align: center;
+  margin-top: 10px;
+  font-size: 12px;
+  color: #2f4f2f;
+  font-weight: bold;
 }
