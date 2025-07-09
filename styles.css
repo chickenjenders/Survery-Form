@@ -41,9 +41,9 @@ body {
 }
 
 .screen {
-  width: 900px; /* Adjust width to fit within TV image */
-  height: 500px; /* Adjust height to fit within TV image */
-  margin: auto; /* Center the screen within the TV */
+  width: 800px; /* slightly narrower */
+  height: 500px; /* shorter so it fits within TV */
+  margin: 130px auto 0; /* add top margin to push down */
   border-radius: 8px;
   position: relative;
   overflow: hidden;
@@ -51,19 +51,15 @@ body {
 }
 
 .content {
-  width: 650px; /* Adjust width to fit within screen */
-  height: 450px; /* Adjust height to fit within screen */
-  margin: auto; /* Center the content within the screen */
+  width: 900px;
+  height: 650px;
+  margin: auto;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  background: url("textbg.png") no-repeat center center;
-  background-size: cover; /* Adjust size */
-  background-position: center; /* Adjust placement */
   color: white;
   text-align: center;
-  padding: 20px;
   opacity: 1;
   transition: opacity 0.3s ease;
 }
